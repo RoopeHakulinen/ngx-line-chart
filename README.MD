@@ -30,7 +30,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-// Import your library
+// Import the module
 import { NgxLineChartModule } from 'ngx-line-chart';
 
 @NgModule({
@@ -39,6 +39,7 @@ import { NgxLineChartModule } from 'ngx-line-chart';
   ],
   imports: [
     BrowserModule,
+    // Add module here
     NgxLineChartModule
   ],
   providers: [],
