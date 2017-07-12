@@ -1,0 +1,33 @@
+{
+  "name": "ngx-line-chart",
+  "version": "0.0.1-beta.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RoopeHakulinen/ngx-line-chart"
+  },
+  "author": {
+    "name": "Roope Hakulinen",
+    "email": "roope.hakulinen@gmail.com"
+  },
+  "keywords": [
+    "angular",
+    "line chart",
+    "chart",
+    "graph"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RoopeHakulinen/ngx-line-chart/issues"
+  },
+  "module": "ngx-line-chart.js",
+  "typings": "ngx-line-chart.d.ts",
+  "dependencies": {
+    "deepmerge": "^1.5.0"
+  },
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}

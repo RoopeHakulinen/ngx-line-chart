@@ -1,0 +1,74 @@
+<div class="chart" xmlns:svg="http://www.w3.org/1999/XSL/Transform">
+    <div class="graph">
+        <svg
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                [attr.viewBox]="'0 0 ' + width + ' ' + height">
+            <svg:g class="grid y-grid">
+                <svg:line
+                        [attr.x1]="padding"
+                        [attr.x2]="width - padding"
+                        [attr.y1]="height - padding"
+                        [attr.y2]="height - padding"></svg:line>
+            </svg:g>
+            <svg:g class="labels labels-x">
+                <svg:line
+                        [attr.x1]="value.x"
+                        [attr.x2]="value.x"
+                        [attr.y1]="height - padding"
+                        [attr.y2]="height - padding + 10"
+                        *ngFor="let value of getXAxisValues()"></svg:line>
+                <svg:text
+                        [attr.y]="height - padding + 20"
+                        [attr.x]="value.x - 12"
+                        *ngFor="let value of getXAxisValues()">
+                    {{value.label}}
+                </svg:text>
+            </svg:g>
+            <svg:g class="labels labels-y">
+                <svg:text
+                        [attr.x]="padding - 30"
+                        [attr.y]="value.y + 4"
+                        [attr.stroke]="style.dataSetStyles[0].labels.yAxis.color"
+                        *ngFor="let value of getYAxisValues(0)">{{value.label}}
+                </svg:text>
+                <svg:line
+                        [attr.x1]="padding"
+                        [attr.x2]="width - padding"
+                        [attr.y1]="value.y"
+                        [attr.y2]="value.y"
+                        *ngFor="let value of getYAxisValues(0)"></svg:line>
+            </svg:g>
+            <svg:g class="labels labels-y">
+                <svg:text
+                        [attr.x]="width - padding + 10"
+                        [attr.y]="value.y + 4"
+                        [attr.stroke]="style.dataSetStyles[1].labels.yAxis.color"
+                        *ngFor="let value of getYAxisValues(1)">{{value.label}}
+                </svg:text>
+            </svg:g>
+            <svg:g class="data" [id]="'set-' + (i + 1)" *ngFor="let set of dataSets; let i = index">
+                <svg:circle
+                        [attr.cx]="point.x"
+                        [attr.cy]="point.y"
+                        [attr.data-value]="point.y"
+                        [attr.stroke]="style.dataSetStyles[i].circle.color"
+                        [attr.fill]="style.dataSetStyles[i].circle.color"
+                        [attr.r]="style.dataSetStyles[i].circle.radius"
+                        *ngFor="let point of getScaledPoints(set.points)"></svg:circle>
+                <svg:text
+                        [attr.y]="point.y - 14"
+                        [attr.x]="point.x - 10"
+                        [attr.stroke]="style.dataSetStyles[i].labels.value.color"
+                        [attr.font-size]="18"
+                        *ngFor="let point of getScaledPoints(set.points)">
+                    {{point.originalY}}
+                </svg:text>
+                <svg:path
+                        [attr.stroke-width]="style.dataSetStyles[i].line.width"
+                        [attr.stroke]="style.dataSetStyles[i].line.color"
+                        [attr.d]="pointsToPath(getScaledPoints(set.points))"></svg:path>
+            </svg:g>
+        </svg>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="chart-container">
+    <ngx-chart
+            [dataSets]="dataSets"
+            [axes]="axes"
+            [xLabelFunction]="xLabelFunction"
+            [style]="style"></ngx-chart>
+    <div class="labels">
+        <div class="set" *ngFor="let dataSet of dataSets; let i = index">
+            <svg width="34" height="16" viewBox="0 0 120 120"
+                 class="color-indicator"
+                 xmlns="http://www.w3.org/2000/svg">
+                <svg:rect
+                        x="0"
+                        y="30"
+                        width="120"
+                        height="60"
+                        rx="16"
+                        ry="16"
+                        [attr.fill]="style.dataSetStyles[i].circle.color"/>
+            </svg>
+            <span class="name" [innerHTML]="dataSet.name"></span>
+        </div>
+    </div>
+</div>

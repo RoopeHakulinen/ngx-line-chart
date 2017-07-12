@@ -1,0 +1,18 @@
+
+.labels {
+  text-align: center;
+
+  .set {
+    display: inline-block;
+    margin-right: 10px;
+
+    .color-indicator {
+      display: inline-block;
+    }
+
+    .name {
+      vertical-align: text-bottom;
+    }
+  }
+
+}
