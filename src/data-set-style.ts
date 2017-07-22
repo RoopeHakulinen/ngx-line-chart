@@ -1,18 +1,20 @@
 export interface IDataSetStyle {
-  circle: {
-    color: string;
-    radius: number;
-  };
-  line: {
-    color: string;
-    width: number;
-  };
-  labels: {
-    yAxis: {
-      color: string;
-    },
-    value: {
-      color: string;
-    }
-  };
+    circle?: {
+        color?: string;
+        radius?: number;
+    };
+    labels?: {
+        value?: {
+            color?: string;
+            fontSize?: number;
+        };
+        yAxis?: {
+            color?: string;
+            fontSize?: number;
+        };
+    };
+    line?: {
+        color?: string;
+        width?: number;
+    };
 }

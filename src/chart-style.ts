@@ -1,5 +1,11 @@
 import { IDataSetStyle } from './data-set-style';
 
 export interface IChartStyle {
-  dataSetStyles: IDataSetStyle[];
+    dataSetStyles?: IDataSetStyle[];
+    xAxis?: {
+        labels?: {
+            color?: string;
+            fontSize?: number;
+        };
+    };
 }

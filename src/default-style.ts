@@ -9,10 +9,12 @@ export const defaultStyle: IChartStyle = {
             },
             labels: {
                 value: {
-                    color: '#0051BA'
+                    color: '#0051BA',
+                    fontSize: 18
                 },
                 yAxis: {
-                    color: '#0051BA'
+                    color: '#0051BA',
+                    fontSize: 18
                 }
             },
             line: {
@@ -27,10 +29,12 @@ export const defaultStyle: IChartStyle = {
             },
             labels: {
                 value: {
-                    color: '#1F1F21'
+                    color: '#1F1F21',
+                    fontSize: 18
                 },
                 yAxis: {
-                    color: '#575759'
+                    color: '#575759',
+                    fontSize: 18
                 }
             },
             line: {
@@ -38,5 +42,11 @@ export const defaultStyle: IChartStyle = {
                 width: 5
             }
         }
-    ]
+    ],
+    xAxis: {
+        labels: {
+            color: '#8C8C8E',
+            fontSize: 24
+        }
+    }
 };

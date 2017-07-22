@@ -60,9 +60,17 @@ export class ChartComponent {
         }
         const scaledPoints = this.getScaledPoints(this.dataSets[setIndex].points)
             .sort((a, b) => a.originalY - b.originalY);
-        const mid = scaledPoints[Math.floor(scaledPoints.length / 2)];
-        const max = scaledPoints[scaledPoints.length - 1];
-        const midLabelValue = ChartComponent.findMiddle(this.dataSets[setIndex].points.map((point) => point.y));
+        const min = scaledPoints[0];
+        let mid = scaledPoints[Math.floor(scaledPoints.length / 2)];
+        let max = scaledPoints[scaledPoints.length - 1];
+        let midLabelValue = ChartComponent.findMiddle(this.dataSets[setIndex].points.map((point) => point.y));
+        if (max.y === min.y) {
+            midLabelValue = 0.5;
+            mid.y = 0.5;
+            mid.originalY = 0.5;
+            max.y = this.padding;
+            max.originalY = 1;
+        }
         return [
             {
                 label: this.getYLabel(0),

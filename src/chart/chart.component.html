@@ -19,8 +19,11 @@
                         [attr.y2]="height - padding + 10"
                         *ngFor="let value of getXAxisValues()"></svg:line>
                 <svg:text
-                        [attr.y]="height - padding + 20"
-                        [attr.x]="value.x - 12"
+                        [attr.y]="height - padding + 38"
+                        [attr.x]="value.x - 12 - (3/4) * style.xAxis.labels.fontSize"
+                        [attr.stroke]="style.xAxis.labels.color"
+                        [attr.fill]="style.xAxis.labels.color"
+                        [attr.font-size]="style.xAxis.labels.fontSize"
                         *ngFor="let value of getXAxisValues()">
                     {{value.label}}
                 </svg:text>
@@ -30,6 +33,8 @@
                         [attr.x]="padding - 30"
                         [attr.y]="value.y + 4"
                         [attr.stroke]="style.dataSetStyles[0].labels.yAxis.color"
+                        [attr.fill]="style.dataSetStyles[0].labels.yAxis.color"
+                        [attr.font-size]="style.dataSetStyles[0].labels.yAxis.fontSize"
                         *ngFor="let value of getYAxisValues(0)">{{value.label}}
                 </svg:text>
                 <svg:line
@@ -44,6 +49,8 @@
                         [attr.x]="width - padding + 10"
                         [attr.y]="value.y + 4"
                         [attr.stroke]="style.dataSetStyles[1].labels.yAxis.color"
+                        [attr.fill]="style.dataSetStyles[1].labels.yAxis.color"
+                        [attr.font-size]="style.dataSetStyles[1].labels.yAxis.fontSize"
                         *ngFor="let value of getYAxisValues(1)">{{value.label}}
                 </svg:text>
             </svg:g>
@@ -60,7 +67,8 @@
                         [attr.y]="point.y - 14"
                         [attr.x]="point.x - 10"
                         [attr.stroke]="style.dataSetStyles[i].labels.value.color"
-                        [attr.font-size]="18"
+                        [attr.fill]="style.dataSetStyles[i].labels.value.color"
+                        [attr.font-size]="style.dataSetStyles[i].labels.value.fontSize"
                         *ngFor="let point of getScaledPoints(set.points)">
                     {{point.originalY}}
                 </svg:text>

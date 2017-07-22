@@ -103,8 +103,8 @@ export class LineChartComponent implements OnInit {
 
     private applyDefaultStyle() {
         this.style = deepmerge(
-            this.style || {},
             defaultStyle,
+            this.style || {}
         );
     }
 }
