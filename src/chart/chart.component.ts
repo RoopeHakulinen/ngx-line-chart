@@ -62,6 +62,7 @@ export class ChartComponent {
             .sort((a, b) => a.originalY - b.originalY);
         const mid = scaledPoints[Math.floor(scaledPoints.length / 2)];
         const max = scaledPoints[scaledPoints.length - 1];
+        const midLabelValue = ChartComponent.findMiddle(this.dataSets[setIndex].points.map((point) => point.y));
         return [
             {
                 label: this.getYLabel(0),
@@ -69,10 +70,8 @@ export class ChartComponent {
             },
             {
                 ...mid,
-                label: this.getYLabel(
-                    ChartComponent.findMiddle(this.dataSets[setIndex].points.map((point) => point.y))
-                ),
-                y: this.height / 2,
+                label: this.getYLabel(midLabelValue),
+                y: this.height / 2
             },
             {
                 ...max,
@@ -101,18 +100,26 @@ export class ChartComponent {
     public getScaledPoints(points: IPoint[]): IScaledPoint[] {
         const minAndMaxX = ChartComponent.findMinAndMax(points.map((point) => point.x));
         const minAndMaxY = ChartComponent.findMinAndMax(points.map((point) => point.y));
-        return points.map((point) => ({
-                originalX: point.x,
-                originalY: point.y,
-                x: Math.max(
-                    ChartComponent.scaleValueBetween0And1(point.x, minAndMaxX, 'x') * (this.width - this.padding),
-                    this.padding
-                ),
-                y: Math.max(
-                    this.height - ChartComponent.scaleValueBetween0And1(point.y, minAndMaxY, 'y') * this.height,
-                    this.padding
-                )
-            })
+        return points.map((point) => {
+                let scaledY = ChartComponent.scaleValueBetween0And1(point.y, minAndMaxY, 'y');
+                let scaledX = ChartComponent.scaleValueBetween0And1(point.x, minAndMaxX, 'x');
+                return {
+                    originalX: point.x,
+                    originalY: point.y,
+                    x: Math.max(
+                        scaledX * (this.width - this.padding),
+                        this.padding
+                    ),
+                    y:
+                        Math.min(
+                            Math.max(
+                                this.height - scaledY * this.height,
+                                this.padding
+                            ),
+                            this.height - this.padding
+                        )
+                };
+            }
         ).sort((a, b) => a.originalX - b.originalX);
     }
 
