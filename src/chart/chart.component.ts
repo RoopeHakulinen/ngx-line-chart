@@ -17,7 +17,11 @@ export class ChartComponent {
         if (type === 'x') {
             min = minAndMax.min;
         }
-        return (value - min) / (minAndMax.max - min);
+        let divider = minAndMax.max - min;
+        if (divider === 0) {
+            return 0;
+        }
+        return (value - min) / divider;
     }
 
     private static findMinAndMax(values: number[]) {
