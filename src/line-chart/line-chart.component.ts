@@ -3,6 +3,7 @@ import deepmerge from 'deepmerge';
 import { IAxis } from '../axis';
 import { IChartStyle } from '../chart-style';
 import { IDataSet } from '../data-set';
+import { defaultStyle } from '../default-style';
 
 @Component({
     selector: 'ngx-line-chart',
@@ -10,47 +11,6 @@ import { IDataSet } from '../data-set';
     templateUrl: './line-chart.component.html'
 })
 export class LineChartComponent implements OnInit {
-    private static DEFAULT_STYLE: IChartStyle = {
-        dataSetStyles: [
-            {
-                circle: {
-                    color: '#0051BA',
-                    radius: 4
-                },
-                labels: {
-                    value: {
-                        color: '#0051BA'
-                    },
-                    yAxis: {
-                        color: '#0051BA'
-                    }
-                },
-                line: {
-                    color: 'rgba(0, 81, 186, 0.4)',
-                    width: 5
-                }
-            },
-            {
-                circle: {
-                    color: '#1F1F21',
-                    radius: 4
-                },
-                labels: {
-                    value: {
-                        color: '#1F1F21'
-                    },
-                    yAxis: {
-                        color: '#575759'
-                    }
-                },
-                line: {
-                    color: 'rgba(87, 87, 89, 0.4)',
-                    width: 5
-                }
-            }
-        ]
-    };
-
     @Input()
     public axes: IAxis[];
 
@@ -144,7 +104,7 @@ export class LineChartComponent implements OnInit {
     private applyDefaultStyle() {
         this.style = deepmerge(
             this.style || {},
-            LineChartComponent.DEFAULT_STYLE,
+            defaultStyle,
         );
     }
 }
