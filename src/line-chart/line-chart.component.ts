@@ -143,7 +143,7 @@ export class LineChartComponent implements OnInit {
 
     private applyDefaultStyle() {
         this.style = deepmerge(
-            this.style,
+            this.style || {},
             LineChartComponent.DEFAULT_STYLE,
         );
     }
