@@ -19,7 +19,7 @@ Good-looking, easy-to-use, customizable Angular line chart library for 1 or 2 da
 To install this library, run:
 
 ```bash
-$ npm install ngx-line-chart --save
+$ npm install ngx-line-chart # Add --save if using npm version < 5
 ```
 
 and then add the module in `AppModule` as an imported module:
@@ -39,8 +39,7 @@ import { NgxLineChartModule } from 'ngx-line-chart';
   ],
   imports: [
     BrowserModule,
-    // Add module here
-    NgxLineChartModule
+    NgxLineChartModule // Add module here
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -48,22 +47,40 @@ import { NgxLineChartModule } from 'ngx-line-chart';
 export class AppModule { }
 ```
 
+Now a component with selector `ngx-line-chart` is registered and is usable in the templates.
+
 ## Usage
 Module only contains single component, called `ngx-line-chart` to be used in the templates:
 
 ```html
-<ngx-line-chart []></ngx-line-chart>
+<ngx-line-chart [dataSets]="myDataSets" [xLabelFunction]="formXAxisValue.bind(this)"></ngx-line-chart>
 ```
 
-See explanation for inputs below.
+```typescript
+export class MyComponent {
+    myDataSets = [{
+        name: 'likes',
+        points: [
+            {x: 10, y: 100},
+            {x: 20, y: 500}
+        ]
+    }];
+    
+    formatXAxisValue(value: number) {
+        return `Value ${value}`;
+    }
+}
+```
+
+See below for details about all of the inputs.
 
 ### Inputs
-| Input          | Type                      | Example value                                                                | Description                                                                                                                                                                                                       |
-|----------------|---------------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| dataSets       | IDataSet[]                | [{name: 'likes', points: [{x: 10, y: 100}, {x: 20, y: 500}, {x: 50, y: 40}]] | Array of 1 or 2 data sets each containing a name and the actual data points (x and y as numbers). There data sets will be used to determine x-axis values along with the corresponding y-axis for each data set.  |
-| xLabelFunction | (value: number) => string | (value: number) => value.toString() (this is the default)                    | This function will be called for each value of the x-axis labels for it to be formatted. Default function shows the values as they are. You may use this to format values as for example dates.                   |
-| xLabelFunction | (value: number) => string | (value: number) => value.toString() (this is the default)                    | This function will be called for each value of the y-axis labels for it to be formatted. Default function shows the values as they are.                                                                           |
-| style          | IChartStyle               | -                                                                            | Explained below.                                                                                                                                                                                                  |
+| Input          | Type                      | Example value                                                                | Description                                                                                                                                                                                                                                                                |
+|----------------|---------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dataSets       | IDataSet[]                | [{name: 'likes', points: [{x: 10, y: 100}, {x: 20, y: 500}, {x: 50, y: 40}]] | Array of 1 or 2 data sets each containing a name and the actual data points (x and y as numbers). There data sets will be used to determine x-axis values along with the corresponding y-axis for each data set.                                                           |
+| xLabelFunction | (value: number) => string | (value: number) => value.toString() (this is the default)                    | This function will be called for each value of the x-axis labels for it to be formatted. Default function shows the values as they are. You may use this to format values as for example dates. *See [example](#usage) above for how to pass a method (`bind` is needed)*. |
+| yLabelFunction | (value: number) => string | (value: number) => value.toString() (this is the default)                    | This function will be called for each value of the y-axis labels for it to be formatted. Default function shows the values as they are.                                                                                                                                    |
+| style          | IChartStyle               |                                                                              | See [Chart details](#chart-details) below.                                                                                                                                                                                                                                 |
 
 The `axes` input will be fixed in the future to work as intended. It can be skipped for now.
 
@@ -79,10 +96,90 @@ The most important thing to note is that the line chart will always fulfill the 
 </div>
 ```
 
-The chart will now be 600px x 400px.
+The chart will now be 600px x 400px as it fulfills the container. Please note that the container doesn't of course need to have size specified as pixels but instead it can be declared as percentages etc.
 
 #### Chart details
-Details of the chart can be fine tuned also with `style` input. The options for this include:
+Details of the chart can be fine tuned with `style` input. [default-style.ts](src/default-style.ts) gives a good example on how the object passed should look like:
+
+```typescript
+import { IChartStyle } from './chart-style';
+
+export const defaultStyle: IChartStyle = {
+    dataSetStyles: [
+        {
+            circle: {
+                color: '#0051BA',
+                radius: 4
+            },
+            labels: {
+                value: {
+                    color: '#0051BA',
+                    fontSize: 18
+                },
+                yAxis: {
+                    color: '#0051BA',
+                    fontSize: 18
+                }
+            },
+            line: {
+                color: 'rgba(0, 81, 186, 0.4)',
+                width: 5
+            }
+        },
+        {
+            circle: {
+                color: '#1F1F21',
+                radius: 4
+            },
+            labels: {
+                value: {
+                    color: '#1F1F21',
+                    fontSize: 18
+                },
+                yAxis: {
+                    color: '#575759',
+                    fontSize: 18
+                }
+            },
+            line: {
+                color: 'rgba(87, 87, 89, 0.4)',
+                width: 5
+            }
+        }
+    ],
+    xAxis: {
+        labels: {
+            color: '#8C8C8E',
+            fontSize: 24
+        }
+    }
+};
+``` 
+
+These are also the default values and can be partially or fully altered by providing the input as follows:
+
+```html
+<ngx-line-chart [style]="chartStyles"></ngx-line-chart>
+``` 
+
+```typescript
+export class MyComponent {
+    chartStyles = {
+        xAxis: {
+            labels: {
+                color: 'red'
+            }
+        }
+    }
+}
+```
+
+This will now merge the specified red color for x-axis labels with the default styles. 
+
+For colors all the ways possible to declare a color in CSS will work. This includes:
+- common color names such as `red` and `blue`
+- RGB values as hexa and integer versions such as `#FFFFFF`, `#242424`, `rgb(255, 255, 255)` and `rgba(60, 60, 60, 0.5)`
+- HSL colors such as `hsl(120, 100%, 50%)` and `hsla(120, 100%, 25%, 0.4)`
 
 
 ## Future
