@@ -18,10 +18,10 @@ export class LineChartComponent implements OnInit {
     public dataSets: IDataSet[];
 
     @Input()
-    public xLabelFunction: (value: number) => string;
+    public xLabelFunction: (value: number) => string = (value) => value.toString();
 
     @Input()
-    public yLabelFunction: (value: number) => string;
+    public yLabelFunction: (value: number) => string = (value) => value.toString();
 
     @Input()
     public style: IChartStyle;
@@ -91,12 +91,6 @@ export class LineChartComponent implements OnInit {
             this.axes = [LineChartComponent.getDefaultAxis(this.dataSets)];
         } else {
             LineChartComponent.ensureAxisDoMatchToXValuesOfPoints(this.axes, this.dataSets);
-        }
-        if (!this.xLabelFunction) {
-            this.xLabelFunction = (value) => value.toString();
-        }
-        if (!this.yLabelFunction) {
-            this.yLabelFunction = (value) => value.toString();
         }
         this.applyDefaultStyle();
     }
