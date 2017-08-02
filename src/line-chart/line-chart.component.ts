@@ -81,7 +81,7 @@ export class LineChartComponent implements OnInit {
 
     public ngOnInit() {
         if (!this.dataSets || this.dataSets.length === 0) {
-            throw new Error('No data sets specified');
+            throw new Error('No data sets specified.');
         }
         if (this.dataSets.length > 2) {
             throw new Error('Only one or two data sets allowed.');
