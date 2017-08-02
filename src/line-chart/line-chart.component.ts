@@ -18,13 +18,7 @@ export class LineChartComponent implements OnInit {
     public dataSets: IDataSet[];
 
     @Input()
-    public xLabelFunction: (value: number) => string = (value) => value.toString();
-
-    @Input()
-    public yLabelFunction: (value: number) => string = (value) => value.toString();
-
-    @Input()
-    public style: IChartStyle;
+    public style: IChartStyle = {};
 
     private static getDefaultAxis(dataSets: IDataSet[]) {
         // Find min and max of all data sets and then calculate axis min and max from those
@@ -79,6 +73,12 @@ export class LineChartComponent implements OnInit {
         });
     }
 
+    @Input()
+    public xLabelFunction: (value: number) => string = (value) => value.toString();
+
+    @Input()
+    public yLabelFunction: (value: number) => string = (value) => value.toString();
+
     public ngOnInit() {
         if (!this.dataSets || this.dataSets.length === 0) {
             throw new Error('No data sets specified.');
@@ -98,7 +98,7 @@ export class LineChartComponent implements OnInit {
     private applyDefaultStyle() {
         this.style = deepmerge(
             defaultStyle,
-            this.style || {}
+            this.style
         );
     }
 }
