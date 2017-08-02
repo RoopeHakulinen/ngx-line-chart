@@ -9,7 +9,7 @@
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
-    "test": "tsc && karma start"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
     "core-js": "^2.4.1",
+    "deepmerge": "^1.5.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
@@ -50,6 +51,8 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-typescript": "^3.0.5",
+    "karma-typescript-angular2-transform": "^1.0.0",
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
     "node-watch": "^0.5.2",

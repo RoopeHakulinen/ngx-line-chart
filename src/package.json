@@ -19,7 +19,9 @@
   "bugs": {
     "url": "https://github.com/RoopeHakulinen/ngx-line-chart/issues"
   },
+  "main": "ngx-line-chart.umd.js",
   "module": "ngx-line-chart.js",
+  "jsnext:main": "ngx-line-chart.js",
   "typings": "ngx-line-chart.d.ts",
   "dependencies": {
     "deepmerge": "^1.5.0"
