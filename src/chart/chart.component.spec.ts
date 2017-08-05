@@ -19,10 +19,6 @@ const testSet2 = {
     { x: 8, y: 300 },
   ]
 };
-const testAxis1 = {
-  min: 0,
-  max: 500
-};
 
 describe('ChartComponent', () => {
   let component: ChartComponent;
