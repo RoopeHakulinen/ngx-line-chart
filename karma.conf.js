@@ -38,7 +38,8 @@ module.exports = function (config) {
       },
       compilerOptions: {
         lib: ['es2015', 'es2016', 'dom']
-      }
+      },
+      exclude: ['demo']
     },
 
 
