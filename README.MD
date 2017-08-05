@@ -193,6 +193,24 @@ Plan is to generalize the library as going forward. Things to be included contai
 Pull requests would be greatly appreciated for any of these or any other features you feel would be useful.
 
 ## Development
+To run the demo project:
+1. Run `npm run build` in the root directory to generate `dist/` (`npm install` first, of course)
+2. Go to `demo/` and run `npm install`
+3. Go to root and run `npm run prepare-demo`. This copies `dist/` folder to the `node_modules/` of demo application. This is essentially what `npm link` would achieve with symbolic link, but there's a [known problem](https://github.com/angular/angular/issues/15763) with Angular and `npm link`.
+4. Go back to the `demo/` and start dev server with `npm start`
+
+So to conclude:
+```bash
+npm install
+npm run build
+cd demo
+npm install
+cd ..
+npm run prepare-demo
+cd demo
+npm start
+```
+
 To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
 
 ```bash
