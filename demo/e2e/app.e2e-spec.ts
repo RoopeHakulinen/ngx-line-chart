@@ -7,7 +7,7 @@ describe('demo App', () => {
     page = new DemoPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display the graph 1 correctly', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
