@@ -50,7 +50,7 @@ export class LineChartComponent implements OnInit {
 
     const range = lastPointX - firstPointX;
     for (let i = 1; i < n; ++i) {
-      result.push(range / n * i + firstPointX);
+      result.push(range / (n - 1) * i + firstPointX);
     }
 
     result.push(lastPointX);
