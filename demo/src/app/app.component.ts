@@ -83,6 +83,7 @@ export class AppComponent {
       ]
     }
   ];
+  data3XAxisValues = [0, 50, 200];
   data4 = [
     {
       name: 'likes',

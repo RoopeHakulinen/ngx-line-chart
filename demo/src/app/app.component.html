@@ -4,11 +4,25 @@
 </div>
 <div class="graph graph-2">
   <h2>Basic chart with two data sets</h2>
-  <ngx-line-chart [dataSets]="data2"></ngx-line-chart>
+  <ngx-line-chart
+    [dataSets]="data2"></ngx-line-chart>
 </div>
-<div class="graph graph-3">
+<div class="graph graph-3-a">
   <h2>Really many data points</h2>
-  <ngx-line-chart [dataSets]="data3"></ngx-line-chart>
+  <ngx-line-chart
+    [dataSets]="data3"></ngx-line-chart>
+</div>
+<div class="graph graph-3-b">
+  <h2>Really many data points with only few, specific x-axis labels</h2>
+  <ngx-line-chart
+    [dataSets]="data3"
+    [xAxisValues]="data3XAxisValues"></ngx-line-chart>
+</div>
+<div class="graph graph-3-c">
+  <h2>Really many data points with only 5 x-axis labels</h2>
+  <ngx-line-chart
+    [dataSets]="data3"
+    [xAxisValues]="5"></ngx-line-chart>
 </div>
 <div class="graph graph-4">
   <h2>Dates as labels</h2>
