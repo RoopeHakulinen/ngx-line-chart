@@ -77,21 +77,6 @@ describe('LineChartComponent', () => {
       });
     });
 
-    describe('axes', () => {
-      describe('constructs default axes', () => {
-        xit('if only 1 data set is provided', () => {
-          component.dataSets = [testSet1];
-          component.ngOnInit();
-          expect(component.axes).toBe([]);
-        });
-        xit('if 2 data sets are provided', () => {
-          component.dataSets = [testSet1, testSet2];
-          component.ngOnInit();
-          expect(component.axes).toBe([]);
-        });
-      });
-    });
-
     describe('label functions', () => {
       it('xLabelFunction should default to conversion to string', () => {
         expect(component.xLabelFunction(1)).toBe('1');
@@ -120,40 +105,6 @@ describe('LineChartComponent', () => {
         const expectedStyles = Object.assign({}, defaultStyle);
         expectedStyles.xAxis.labels.color = 'orange';
         expect(component.style).toEqual(expectedStyles);
-      });
-    });
-
-    describe('xAxisValues', () => {
-      it('if none provided, use the first data sets x-values', () => {
-        component.dataSets = [testSet1];
-        component.ngOnInit();
-        expect(component.xAxisValues).toEqual(testSet1.points.map(item => item.x));
-      });
-      describe('if number provided', () => {
-        it('split the x-axis to 4 points', () => {
-          component.dataSets = [testSet3];
-          component.xAxisValues = 4;
-          component.ngOnInit();
-          expect(component.xAxisValues).toEqual([4, 13, 27, 40]);
-        });
-        it('gives the original x-axis to as many points as the data set is long', () => {
-          component.dataSets = [testSet3];
-          component.xAxisValues = testSet3.points.length;
-          component.ngOnInit();
-          expect(component.xAxisValues).toEqual(testSet3.points.map(item => item.x));
-        });
-        it('counts the xAxisValues again on change', () => {
-          component.dataSets = [testSet3];
-          component.xAxisValues = testSet3.points.length;
-          component.ngOnInit();
-          expect(component.xAxisValues).toEqual(testSet3.points.map(item => item.x));
-          component.xAxisValues = 4;
-          component.ngOnChanges();
-          expect(component.xAxisValues).toEqual([]);
-          component.xAxisValues = 4;
-          component.ngOnChanges();
-          expect(component.xAxisValues).toEqual([]);
-        });
       });
     });
   });
