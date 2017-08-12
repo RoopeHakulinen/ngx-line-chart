@@ -1,34 +1,33 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IChartStyle } from '../chart-style';
 import { IDataSet } from '../data-set';
 import { IPoint } from '../point';
 import { IScaledPoint } from '../scaled-point';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'ngx-chart',
   styleUrls: ['./chart.component.scss'],
   templateUrl: './chart.component.html'
 })
 export class ChartComponent {
   @Input()
-  public dataSets: IDataSet[];
+  dataSets: IDataSet[];
 
   @Input()
-  public xAxisValues: number[];
+  xAxisValues: number[];
 
   @Input()
-  public xLabelFunction: (value: number) => string;
+  xLabelFunction: (value: number) => string;
 
   @Input()
-  public yLabelFunction: (value: number) => string;
+  yLabelFunction: (value: number) => string;
 
   @Input()
-  public style: IChartStyle;
+  style: IChartStyle;
 
-  public width = 800;
-  public height = 500;
-  public padding = 40;
+  width = 800;
+  height = 500;
+  padding = 40;
 
   private static scaleValueBetween0And1(value: number, minAndMax: { min: number, max: number }, type: string) {
     let min = 0;
@@ -53,7 +52,7 @@ export class ChartComponent {
     return minAndMax.max / 2;
   }
 
-  public getYAxisValues(setIndex: number) {
+  getYAxisValues(setIndex: number) {
     if (setIndex >= this.dataSets.length) {
       return [];
     }
@@ -87,7 +86,7 @@ export class ChartComponent {
     ];
   }
 
-  public getXAxisValues() {
+  getXAxisValues() {
     return this.getScaledPoints(this.xAxisValues.map(value => ({ x: value, y: 0 })))
       .map(scaledPoint => ({
           label: this.getXLabel(scaledPoint.originalX),
@@ -96,14 +95,14 @@ export class ChartComponent {
       );
   }
 
-  public pointsToPath(scaledCoordinates: IScaledPoint[]) {
+  pointsToPath(scaledCoordinates: IScaledPoint[]) {
     const startPoint = scaledCoordinates[0];
     const startPointMove = `M ${startPoint.x} ${startPoint.y}`;
     const path = scaledCoordinates.slice(1).map((point) => `L ${point.x} ${point.y}`).join(' ');
     return `${startPointMove} ${path}`;
   }
 
-  public getScaledPoints(points: IPoint[]): IScaledPoint[] {
+  getScaledPoints(points: IPoint[]): IScaledPoint[] {
     const minAndMaxX = ChartComponent.findMinAndMax(points.map((point) => point.x));
     const minAndMaxY = ChartComponent.findMinAndMax(points.map((point) => point.y));
     return points.map((point) => {

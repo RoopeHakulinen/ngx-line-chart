@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import deepmerge from 'deepmerge';
 import { IChartStyle } from '../chart-style';
 import { IDataSet } from '../data-set';
@@ -9,15 +9,17 @@ import { defaultStyle } from '../default-style';
   styleUrls: ['./line-chart.component.scss'],
   templateUrl: './line-chart.component.html'
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, OnChanges {
   @Input()
-  public xAxisValues: number[] | number;
+  xAxisValues: number[] | number;
 
   @Input()
-  public dataSets: IDataSet[];
+  dataSets: IDataSet[];
 
   @Input()
-  public style: IChartStyle = {};
+  style: IChartStyle = {};
+
+  private _xAxisValues;
 
   private static getDefaultXAxis(dataSets: IDataSet[]) {
     return dataSets[0].points.map((point) => point.x);
@@ -45,6 +47,7 @@ export class LineChartComponent implements OnInit {
     const points = dataSets[0].points;
     const firstPointX = points[0].x;
     const lastPointX = points[points.length - 1].x;
+
     const result = [];
     result.push(firstPointX);
 
@@ -58,12 +61,30 @@ export class LineChartComponent implements OnInit {
   }
 
   @Input()
-  public xLabelFunction: (value: number) => string = (value) => value.toString();
+  xLabelFunction: (value: number) => string = (value) => value.toString();
 
   @Input()
-  public yLabelFunction: (value: number) => string = (value) => value.toString();
+  yLabelFunction: (value: number) => string = (value) => value.toString();
 
-  public ngOnInit() {
+  ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges(changes: any) {
+    this.update();
+    this.dataSets.forEach((dataSet, index) => {
+      const dataSetProxy = new Proxy(dataSet, {
+        set: (target, prop, value) => {
+          target[prop] = value;
+          this.update();
+          return true;
+        }
+      });
+      this.dataSets[index] = dataSetProxy;
+    });
+  }
+
+  private update() {
     if (!this.dataSets || this.dataSets.length === 0) {
       throw new Error('No data sets specified.');
     }
@@ -71,13 +92,16 @@ export class LineChartComponent implements OnInit {
       throw new Error('Only one or two data sets allowed.');
     }
     LineChartComponent.ensureDataSetsHaveSameXValues(this.dataSets);
+
     if (!this.xAxisValues) {
-      this.xAxisValues = LineChartComponent.getDefaultXAxis(this.dataSets);
+      this._xAxisValues = LineChartComponent.getDefaultXAxis(this.dataSets);
     } else if (typeof this.xAxisValues === 'number') {
       if (this.xAxisValues < 2) {
-        throw new Error('xAxisValues can\'t be less than 2 since min and max are required at least for x-axis.');
+        throw new Error('xAxisValue can\'t be less than 2 since min and max are required at least for x-axis.');
       }
-      this.xAxisValues = LineChartComponent.divideXAxisToN(this.xAxisValues, this.dataSets);
+      this._xAxisValues = LineChartComponent.divideXAxisToN(this.xAxisValues, this.dataSets);
+    } else {
+      this._xAxisValues = [...this.xAxisValues];
     }
     this.applyDefaultStyle();
   }

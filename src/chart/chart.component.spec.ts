@@ -36,6 +36,7 @@ describe('ChartComponent', () => {
     component = fixture.componentInstance;
     component.dataSets = [testSet1, testSet2];
     component.style = defaultStyle;
+    component.xAxisValues = testSet1.points.map(item => item.x);
     fixture.detectChanges();
   });
 
