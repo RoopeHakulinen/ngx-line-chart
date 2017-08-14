@@ -19,7 +19,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   @Input()
   style: IChartStyle = {};
 
-  private _xAxisValues;
+  _xAxisValues;
 
   private static getDefaultXAxis(dataSets: IDataSet[]) {
     return dataSets[0].points.map((point) => point.x);
