@@ -105,54 +105,55 @@ Details of the chart can be fine tuned with `style` input. [default-style.ts](sr
 import { IChartStyle } from './chart-style';
 
 export const defaultStyle: IChartStyle = {
-    dataSetStyles: [
-        {
-            circle: {
-                color: '#0051BA',
-                radius: 4
-            },
-            labels: {
-                value: {
-                    color: '#0051BA',
-                    fontSize: 18
-                },
-                yAxis: {
-                    color: '#0051BA',
-                    fontSize: 18
-                }
-            },
-            line: {
-                color: 'rgba(0, 81, 186, 0.4)',
-                width: 5
-            }
+  dataSetStyles: [
+    {
+      circle: {
+        color: '#0051BA',
+        radius: 4
+      },
+      labels: {
+        value: {
+          color: '#0051BA',
+          fontSize: 18
         },
-        {
-            circle: {
-                color: '#1F1F21',
-                radius: 4
-            },
-            labels: {
-                value: {
-                    color: '#1F1F21',
-                    fontSize: 18
-                },
-                yAxis: {
-                    color: '#575759',
-                    fontSize: 18
-                }
-            },
-            line: {
-                color: 'rgba(87, 87, 89, 0.4)',
-                width: 5
-            }
+        yAxis: {
+          color: '#0051BA',
+          fontSize: 18
         }
-    ],
-    xAxis: {
-        labels: {
-            color: '#8C8C8E',
-            fontSize: 24
+      },
+      line: {
+        color: 'rgba(0, 81, 186, 0.4)',
+        width: 5
+      }
+    },
+    {
+      circle: {
+        color: '#1F1F21',
+        radius: 4
+      },
+      labels: {
+        value: {
+          color: '#1F1F21',
+          fontSize: 18
+        },
+        yAxis: {
+          color: '#575759',
+          fontSize: 18
         }
+      },
+      line: {
+        color: 'rgba(87, 87, 89, 0.4)',
+        width: 5
+      }
     }
+  ],
+  xAxis: {
+    labels: {
+      color: '#8C8C8E',
+      fontSize: 24,
+      angle: 60
+    }
+  }
 };
 ``` 
 

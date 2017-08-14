@@ -17,17 +17,6 @@ export class AppComponent implements OnInit {
         { x: 50, y: 90 },
         { x: 60, y: 170 }
       ]
-    },
-    {
-      name: 'dislikes',
-      points: [
-        { x: 10, y: 4 },
-        { x: 20, y: 12 },
-        { x: 30, y: 19 },
-        { x: 40, y: 16 },
-        { x: 50, y: 21 },
-        { x: 60, y: 21 }
-      ]
     }
   ];
   data2 = [
@@ -40,6 +29,17 @@ export class AppComponent implements OnInit {
         { x: 40, y: 40 },
         { x: 50, y: 90 },
         { x: 60, y: 170 }
+      ]
+    },
+    {
+      name: 'dislikes',
+      points: [
+        { x: 10, y: 4 },
+        { x: 20, y: 12 },
+        { x: 30, y: 19 },
+        { x: 40, y: 16 },
+        { x: 50, y: 21 },
+        { x: 60, y: 21 }
       ]
     }
   ];
@@ -71,9 +71,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.data3[0].points = this.generateLargeDataSet();
-    setInterval(() => {
-      this.data3[0].points = this.generateLargeDataSet();
-    }, 5000);
+
   }
 
   generateLargeDataSet() {

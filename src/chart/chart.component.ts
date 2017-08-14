@@ -27,7 +27,7 @@ export class ChartComponent {
 
   width = 800;
   height = 500;
-  padding = 40;
+  padding = 100;
 
   private static scaleValueBetween0And1(value: number, minAndMax: { min: number, max: number }, type: string) {
     let min = 0;

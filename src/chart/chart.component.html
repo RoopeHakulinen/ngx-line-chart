@@ -19,11 +19,12 @@
           [attr.y2]="height - padding + 10"
           *ngFor="let value of getXAxisValues()"></svg:line>
         <svg:text
-          [attr.y]="height - padding + 38"
-          [attr.x]="value.x - 12 - (3/4) * style.xAxis.labels.fontSize"
+          [attr.y]="height - padding + 30"
+          [attr.x]="value.x - 20"
           [attr.stroke]="style.xAxis.labels.color"
           [attr.fill]="style.xAxis.labels.color"
           [attr.font-size]="style.xAxis.labels.fontSize"
+          [attr.transform]="'rotate(' + style.xAxis.labels.angle + ',' + (value.x - 20) + ',' + (height - padding + 30) + ')'"
           *ngFor="let value of getXAxisValues()">
           {{value.label}}
         </svg:text>
