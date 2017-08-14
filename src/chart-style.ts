@@ -6,7 +6,7 @@ export interface IChartStyle {
     labels?: {
       color?: string;
       fontSize?: number;
-      angle: number;
+      angle?: number;
     };
   };
 }
