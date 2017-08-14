@@ -71,7 +71,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.data3[0].points = this.generateLargeDataSet();
-
+    setInterval(() => {
+      this.data3[0].points = this.generateLargeDataSet();
+    }, 10000);
   }
 
   generateLargeDataSet() {
