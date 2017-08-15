@@ -3,6 +3,7 @@ import { IChartStyle } from '../chart-style';
 import { IDataSet } from '../data-set';
 import { IPoint } from '../point';
 import { IScaledPoint } from '../scaled-point';
+import { Utils } from '../utils';
 
 @Component({
   selector: 'ngx-chart',
@@ -29,29 +30,6 @@ export class ChartComponent {
   height = 500;
   padding = 100;
 
-  private static scaleValueBetween0And1(value: number, minAndMax: { min: number, max: number }, type: string) {
-    let min = 0;
-    if (type === 'x') {
-      min = minAndMax.min;
-    }
-    let divider = minAndMax.max - min;
-    if (divider === 0) {
-      return 0;
-    }
-    return (value - min) / divider;
-  }
-
-  private static findMinAndMax(values: number[]) {
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    return { min, max };
-  }
-
-  private static findMiddle(values: number[]) {
-    const minAndMax = ChartComponent.findMinAndMax(values);
-    return minAndMax.max / 2;
-  }
-
   getYAxisValues(setIndex: number) {
     if (setIndex >= this.dataSets.length) {
       return [];
@@ -61,7 +39,7 @@ export class ChartComponent {
     const min = scaledPoints[0];
     let mid = scaledPoints[Math.floor(scaledPoints.length / 2)];
     let max = scaledPoints[scaledPoints.length - 1];
-    let midLabelValue = ChartComponent.findMiddle(this.dataSets[setIndex].points.map((point) => point.y));
+    let midLabelValue = Utils.findMiddleOfMinAndMax(this.dataSets[setIndex].points.map((point) => point.y));
     if (max.y === min.y) {
       midLabelValue = 0.5;
       mid.y = 0.5;
@@ -103,11 +81,11 @@ export class ChartComponent {
   }
 
   getScaledPoints(points: IPoint[], asd = false): IScaledPoint[] {
-    const minAndMaxX = ChartComponent.findMinAndMax(points.map((point) => point.x));
-    const minAndMaxY = ChartComponent.findMinAndMax(points.map((point) => point.y));
+    const minAndMaxX = Utils.findMinAndMax(points.map((point) => point.x));
+    const minAndMaxY = Utils.findMinAndMax(points.map((point) => point.y));
     return points.map((point) => {
-        let scaledX = ChartComponent.scaleValueBetween0And1(point.x, minAndMaxX, 'x');
-        let scaledY = ChartComponent.scaleValueBetween0And1(point.y, minAndMaxY, 'y');
+        let scaledX = Utils.scaleValueBetween0And1(point.x, minAndMaxX, 'x');
+        let scaledY = Utils.scaleValueBetween0And1(point.y, minAndMaxY, 'y');
         return {
           originalX: point.x,
           originalY: point.y,
