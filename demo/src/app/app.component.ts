@@ -82,6 +82,6 @@ export class AppComponent implements OnInit {
         x: Math.floor(Math.random() * 1000),
         y: Math.floor(Math.random() * 1000)
       })
-    );
+    ).sort((a, b) => a.x - b.x);
   }
 }
