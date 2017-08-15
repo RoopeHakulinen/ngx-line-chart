@@ -102,19 +102,16 @@ export class ChartComponent {
     return `${startPointMove} ${path}`;
   }
 
-  getScaledPoints(points: IPoint[]): IScaledPoint[] {
+  getScaledPoints(points: IPoint[], asd = false): IScaledPoint[] {
     const minAndMaxX = ChartComponent.findMinAndMax(points.map((point) => point.x));
     const minAndMaxY = ChartComponent.findMinAndMax(points.map((point) => point.y));
     return points.map((point) => {
-        let scaledY = ChartComponent.scaleValueBetween0And1(point.y, minAndMaxY, 'y');
         let scaledX = ChartComponent.scaleValueBetween0And1(point.x, minAndMaxX, 'x');
+        let scaledY = ChartComponent.scaleValueBetween0And1(point.y, minAndMaxY, 'y');
         return {
           originalX: point.x,
           originalY: point.y,
-          x: Math.max(
-            scaledX * (this.width - this.padding),
-            this.padding
-          ),
+          x: scaledX * (this.width - 2 * this.padding) + this.padding,
           y:
             Math.min(
               Math.max(

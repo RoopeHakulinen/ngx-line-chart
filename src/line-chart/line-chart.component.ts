@@ -52,7 +52,7 @@ export class LineChartComponent implements OnInit, OnChanges {
     result.push(firstPointX);
 
     const range = lastPointX - firstPointX;
-    for (let i = 1; i < n; ++i) {
+    for (let i = 1; i < n - 1; ++i) {
       result.push(range / (n - 1) * i + firstPointX);
     }
 
