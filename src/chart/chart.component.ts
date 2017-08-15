@@ -112,14 +112,7 @@ export class ChartComponent {
           originalX: point.x,
           originalY: point.y,
           x: scaledX * (this.width - 2 * this.padding) + this.padding,
-          y:
-            Math.min(
-              Math.max(
-                this.height - scaledY * this.height,
-                this.padding
-              ),
-              this.height - this.padding
-            )
+          y: this.height - ((scaledY * (this.height - 2 * this.padding)) + this.padding),
         };
       }
     ).sort((a, b) => a.originalX - b.originalX);
