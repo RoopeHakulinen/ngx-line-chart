@@ -1,6 +1,6 @@
 {
   "name": "ngx-line-chart",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/RoopeHakulinen/ngx-line-chart"
