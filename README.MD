@@ -1,6 +1,9 @@
 # ngx-line-chart
 Good-looking, easy-to-use, customizable Angular line chart library for 1 or 2 data sets with separate or common y-axes.
 
+![Chart 1](images/chart-1.png)
+![Chart 2](images/chart-2.png)
+
 ### Features
 - 1 or 2 data sets
 - Nice-looking styles by default that can be customized
@@ -11,9 +14,9 @@ Good-looking, easy-to-use, customizable Angular line chart library for 1 or 2 da
 - AoT-compatible
 
 ### Limitations
-- No more than 1 or 2 data sets
+- Only 1 or 2 data sets allowed
 - X-axis values need to be the same for both data sets
-- Labels need to be numbers (though you can use `xLabelFunction` or `yLabelFunction` to specify how they should be shown) 
+- X and Y values need to be numbers, though you can present them as any string with `xLabelFunction` or `yLabelFunction` 
 
 ## Installation
 To install this library, run:
