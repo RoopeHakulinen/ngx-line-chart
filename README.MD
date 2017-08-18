@@ -10,7 +10,7 @@ Good-looking, easy-to-use, customizable Angular line chart library for 1 or 2 da
 - Produces scalable SVG image
 - Each value will be shown on top of the data point
 - Only single dependency ([`deepmerge`](https://www.npmjs.com/package/deepmerge)) without any transitive dependencies
-- Supported by all mobile and desktop browsers including IE9+ ([Can I use: SVG](http://caniuse.com/#feat=svg))
+- Supported by all mobile and desktop browsers including IE9+ (though see instructions on polyfill required and compatibility [below](#compatibility))
 - AoT-compatible
 
 ### Limitations
@@ -185,6 +185,21 @@ For colors all the ways possible to declare a color in CSS will work. This inclu
 - RGB values as hexa and integer versions such as `#FFFFFF`, `#242424`, `rgb(255, 255, 255)` and `rgba(60, 60, 60, 0.5)`
 - HSL colors such as `hsl(120, 100%, 50%)` and `hsla(120, 100%, 25%, 0.4)`
 
+## Compatibility
+This library uses [SVG](http://caniuse.com/#feat=svg) and [Proxy](http://caniuse.com/#feat=proxy). Proxy isn't supported in Internet Explorer and thus a polyfill called [`proxy-polyfill`](https://github.com/GoogleChrome/proxy-polyfill) is required. 
+
+`proxy-polyfill` can be installed to Angular CLI application as follows:
+Run
+```bash
+npm install proxy-polyfill
+```
+
+and modify `.angular-cli.json` file to contain
+
+```
+"scripts": ["../node_modules/proxy-polyfill/proxy.min.js"],
+```
+for the app object in `apps` array. Please note to use the `proxy.min.js` as the `proxy.js` does not work on IE11. 
 
 ## Future
 Plan is to generalize the library as going forward. Things to be included contain at least:
